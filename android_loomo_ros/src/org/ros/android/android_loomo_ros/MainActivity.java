@@ -48,7 +48,7 @@ import java.util.concurrent.TimeUnit;
  * @author damonkohler@google.com (Damon Kohler)
  * @author mfe@mit.edu (Michael Everett)
  */
-public class MainActivity extends RosActivity implements CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends RosActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
     public static final String TAG = "MainRosActivity";
 
     private Vision mVision;
@@ -99,8 +99,8 @@ public class MainActivity extends RosActivity implements CompoundButton.OnChecke
         setContentView(R.layout.main);
 
 //        // Add a button to be able to hard-kill this app (not recommended by android but whatever)
-//        mKillAppButton = (Button) findViewById(R.id.killapp);
-//        mKillAppButton.setOnClickListener(this);
+        mKillAppButton = (Button) findViewById(R.id.killapp);
+       mKillAppButton.setOnClickListener(this);
 
         // Add a button to show the NTP time offset when clicked
         mTimeOffsetButton = (Button) findViewById(R.id.timeoffset);
@@ -313,4 +313,9 @@ public class MainActivity extends RosActivity implements CompoundButton.OnChecke
             Log.d(TAG, "onUnbind() called with: reason = [" + reason + "]");
         }
     };
+     @Override
+    public void onClick(View v) {
+        finish();
+        System.exit(0);
+    }
 }
